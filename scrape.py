@@ -12,6 +12,10 @@ pagesoup = soup(html, "html.parser")
 # get reviews from here
 reviews = pagesoup.findAll("div",{"class":"hotels-community-tab-common-Card__card--ihfZB hotels-community-tab-common-Card__section--4r93H"})
 
+# write to CSV
+filename = "hotels.csv"
+f = open(filename, "w")
+
 # for loop 5 times per page
 for review in reviews:
 	titleandlink = review.findAll("div",{"class":"hotels-review-list-parts-ReviewTitle__reviewTitle--2Fauz"})
@@ -67,12 +71,12 @@ for review in reviews:
 				finalans+=category+"||||"+minirating
 		#Rooms||||5$$$$Cleanliness||||5$$$$Service||||5
 
-	print(newlink,locName,parsedUrl,reviewTitle,username,date,fullReview,rtemp,finalans)
+	f.write(newlink+", "+locName+", "+parsedUrl+", "+reviewTitle+", "+username+", "+date+", "+fullReview+", "+rtemp+", "+finalans + "\n")
 
-
+f.close()
 #NOTes
-#clean .text with .strip()
-
+# clean .text with .strip()
+# multiple pages can be altered in the url, page = #
 
 
 
